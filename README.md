@@ -62,11 +62,17 @@
  - Для работы со сторонними данными в процессе игры, использовалась современная вариация методов WWWW благодаря подключенным библиотекам: "UnityEngine.Networking" и "SimpleJSON". Данные наборы методов позволили беспрепятственно считать данные с Google Sheets и в последующим преобразовать их в требующийся формат с последующими перерасчетами в рамках игры.
 
 using System;
+
 using System.Collections;
+
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using UnityEngine.Networking;
+
 using SimpleJSON;
+
 
 public class NewDataSounds : MonoBehaviour
 {
