@@ -63,14 +63,6 @@
 
 public class NewDataSounds : MonoBehaviour
 {
-    public AudioClip GoodSpeak;
-    public AudioClip BadSpeak;
-    private AudioSource selectAudio;
-    private Dictionary<char, float> dataSet = new Dictionary<char, float>();
-    private Coroutine start;
-    private bool statusStart = false;
-    private int i = 1;
-    
     void Start()
     {
         start = StartCoroutine(GoodleSheets());
