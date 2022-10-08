@@ -71,6 +71,7 @@ using SimpleJSON;
 
 public class NewDataSounds : MonoBehaviour
 {
+
     public AudioClip GoodSpeak;
     public AudioClip BadSpeak;
     private AudioSource selectAudio;
