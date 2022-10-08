@@ -61,89 +61,90 @@
 ### Самостоятельно разработать сценарий воспроизведения звукового сопровождения в Unity в зависимости от изменения считанных данных в задании 2
  - Для работы со сторонними данными в процессе игры, использовалась современная вариация методов WWWW благодаря подключенным библиотекам: "UnityEngine.Networking" и "SimpleJSON". Данные наборы методов позволили беспрепятственно считать данные с Google Sheets и в последующим преобразовать их в требующийся формат с последующими перерасчетами в рамках игры.
 
+{
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using SimpleJSON;
 
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.Networking;
-    using SimpleJSON;
-
-    public class NewDataSounds : MonoBehaviour
+public class NewDataSounds : MonoBehaviour
+{
+    public AudioClip GoodSpeak;
+    public AudioClip BadSpeak;
+    private AudioSource selectAudio;
+    private Dictionary<char, float> dataSet = new Dictionary<char, float>();
+    private Coroutine start;
+    private bool statusStart = false;
+    private int i = 1;
+    
+    void Start()
     {
-        public AudioClip GoodSpeak;
-        public AudioClip BadSpeak;
-        private AudioSource selectAudio;
-        private Dictionary<char, float> dataSet = new Dictionary<char, float>();
-        private Coroutine start;
-        private bool statusStart = false;
-        private int i = 1;
-        
-        void Start()
+        start = StartCoroutine(GoodleSheets());
+    }
+
+    void Update() 
+    {
+        if (i != dataSet.Count && statusStart == false && Math.Abs(dataSet['a'] - dataSet['b']) <= 0.06) 
         {
-            start = StartCoroutine(GoodleSheets());
+            Debug.Log("Низкая инфляция");
+            StartCoroutine(PlaySelectAudioGood());
         }
 
-        void Update() 
+        if (i != dataSet.Count && statusStart == false && Math.Abs(dataSet['a'] - dataSet['b']) > 0.06) 
         {
-            if (i != dataSet.Count && statusStart == false && Math.Abs(dataSet['a'] - dataSet['b']) <= 0.06) 
-            {
-                Debug.Log("Низкая инфляция");
-                StartCoroutine(PlaySelectAudioGood());
-            }
-
-            if (i != dataSet.Count && statusStart == false && Math.Abs(dataSet['a'] - dataSet['b']) > 0.06) 
-            {
-                Debug.Log("Высокая инфляция");
-                StartCoroutine(PlaySelectAudioBad());
-            }
-        }
-
-        IEnumerator GoodleSheets()
-        {
-            var curentResp = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1XsMN3qNKt3VEp1xoPM4YNCuJ7dsuYhDfNgqekqqYBWA/values/Лист1?key=AIzaSyCM2vG3NHEsHdKEi4374TSwGf8r6V1xOZw");
-            yield return curentResp.SendWebRequest();
-            var rawResp = curentResp.downloadHandler.text;
-            var rawJson = JSON.Parse(rawResp); // Object
-
-            foreach (var itemRawJson in rawJson["values"])
-            {
-                var parseJson = JSON.Parse(itemRawJson.ToString());
-                var selectRow = parseJson[0].AsStringList;
-
-                if ((string)selectRow[0] == "") continue;
-                
-                dataSet.Add('a', float.Parse(selectRow[1]));
-                dataSet.Add('b', float.Parse(selectRow[2]));
-
-                if (selectRow[0] == "1") break;
-            }
-
-            StopCoroutine(start);
-        }
-
-        IEnumerator PlaySelectAudioGood()
-        {
-            statusStart = true;
-            selectAudio = GetComponent<AudioSource>();
-            selectAudio.clip = GoodSpeak;
-            selectAudio.Play();
-            yield return new WaitForSeconds(3);
-            statusStart = false;
-            i++;
-        }
-
-        IEnumerator PlaySelectAudioBad()
-        {
-            statusStart = true;
-            selectAudio = GetComponent<AudioSource>();
-            selectAudio.clip = BadSpeak;
-            selectAudio.Play();
-            yield return new WaitForSeconds(4);
-            statusStart = false;
-            i++;
+            Debug.Log("Высокая инфляция");
+            StartCoroutine(PlaySelectAudioBad());
         }
     }
+
+    IEnumerator GoodleSheets()
+    {
+        var curentResp = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1XsMN3qNKt3VEp1xoPM4YNCuJ7dsuYhDfNgqekqqYBWA/values/Лист1?key=AIzaSyCM2vG3NHEsHdKEi4374TSwGf8r6V1xOZw");
+        yield return curentResp.SendWebRequest();
+        var rawResp = curentResp.downloadHandler.text;
+        var rawJson = JSON.Parse(rawResp); // Object
+
+        foreach (var itemRawJson in rawJson["values"])
+        {
+            var parseJson = JSON.Parse(itemRawJson.ToString());
+            var selectRow = parseJson[0].AsStringList;
+
+            if ((string)selectRow[0] == "") continue;
+            
+            dataSet.Add('a', float.Parse(selectRow[1]));
+            dataSet.Add('b', float.Parse(selectRow[2]));
+
+            if (selectRow[0] == "1") break;
+        }
+
+        StopCoroutine(start);
+    }
+
+    IEnumerator PlaySelectAudioGood()
+    {
+        statusStart = true;
+        selectAudio = GetComponent<AudioSource>();
+        selectAudio.clip = GoodSpeak;
+        selectAudio.Play();
+        yield return new WaitForSeconds(3);
+        statusStart = false;
+        i++;
+    }
+
+    IEnumerator PlaySelectAudioBad()
+    {
+        statusStart = true;
+        selectAudio = GetComponent<AudioSource>();
+        selectAudio.clip = BadSpeak;
+        selectAudio.Play();
+        yield return new WaitForSeconds(4);
+        statusStart = false;
+        i++;
+    }
+}
+}
 
 
 ## Выводы
