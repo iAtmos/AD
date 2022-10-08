@@ -71,7 +71,6 @@ using UnityEngine.Networking;
 using SimpleJSON;
 
 public class NewDataSounds : MonoBehaviour
-
 {
 
     public AudioClip GoodSpeak;
