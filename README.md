@@ -44,6 +44,7 @@
 - После этего создаем новые проект в Unity к которому через Windows Package Manager подключаем mlagents и формируем базовые обьекты - цель, за которой будет следовать RollerAgent и самого RollerAgent. К RollerAgent подключаем компаненты физики (Rigidbody), Behavior Requester и Behavior Parmeters. Создаем новый скрипт.
  
 #code
+    
     public class RollerAgent : Agent
     {
         private Rigidbody rBody;
