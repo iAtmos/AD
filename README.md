@@ -102,8 +102,7 @@
 - Для ускорения, созданную платформу с целью и агентом помещаем в prefab и кланируем несколько раз.
 ![image](https://user-images.githubusercontent.com/114149527/200236329-6b881b09-4688-4714-ad84-8a6b6ff04c33.png)
 - После учпешного обучения, в папке с configom создается обученая сетка передвжения RollerAgenta, которую мы переносим в Unity прокет и помещаем в поле Model.
-![image](https://user-images.githubusercontent.com/114149527/200236642-7b8f7175-e463-4a94-8a39-761ad73164ab.png)
-
+![image](https://user-images.githubusercontent.com/114149527/200236875-e3739fca-da71-468e-985b-5ecdd489ffbb.png)
 
 ## Выводы
 
