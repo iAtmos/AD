@@ -42,6 +42,7 @@
 - Используя терминал anaconda создаем изолированное пространство TestAgentб в котором устанавливаем пакеты thorch версии 1.7.1 и mlagents 0.28.0 соотвественно.
 ![Снимок экрана 2022-11-07 094127](https://user-images.githubusercontent.com/114149527/200232737-a025528c-fd02-4ac5-a30f-df8344945740.png)
 - После этего создаем новые проект в Unity к которому через Windows Package Manager подключаем mlagents и формируем базовые обьекты - цель, за которой будет следовать RollerAgent и самого RollerAgent. К RollerAgent подключаем компаненты физики (Rigidbody), Behavior Requester и Behavior Parmeters. Создаем новый скрипт.
+
   using System.Collections;
   using System.Collections.Generic;
   using UnityEngine;
