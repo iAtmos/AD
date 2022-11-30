@@ -61,6 +61,7 @@ https://user-images.githubusercontent.com/114149527/204876923-ceb63893-f7ff-4383
 - Реализация строится на определение текущего цвета материала обьекта и последующем его изменение на случайный показатель RGB.
 
 void Train(int epochs)
+    
     {
         InitialiseWeights();
 
