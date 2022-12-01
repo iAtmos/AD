@@ -59,7 +59,7 @@
       ...
       tempInf = ((pricesMonth[1] - pricesMonth[0]) / pricesMonth[0]) * 110;
       
-в
+![image](https://user-images.githubusercontent.com/114149527/205120480-bfe6b333-667c-43d8-83d5-300e15ac2a78.png)
 
 
 
