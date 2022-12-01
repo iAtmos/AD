@@ -49,7 +49,8 @@
       Debug.Log("SpeedMove: " + speedMove);
       timeMining = Mathf.Clamp(actionBuffers.ContinuousActions[1], 1f, 4f);
 
-
+![image](https://user-images.githubusercontent.com/114149527/205115220-b8bcaa3c-8703-4db5-a81f-2ecfb3c47377.png)
+- Результаты экспермента частично потверждают данную теорию и наглядно демонстрируют корреляцию графиков. Но поскольку, прошлые показатели благосостояния RollerAgenta были высоки, а экономические показатели сремились к ~0 это не столь выраженно. 
 
 
 ## Выводы
